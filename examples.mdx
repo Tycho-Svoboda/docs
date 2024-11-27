@@ -1,0 +1,30 @@
+---
+title: 'Examples'
+description: 'These examples will illustrate how to use TensorPool'
+icon: 'list'
+---
+### Example 1
+Simple tensor addition
+```python
+import torch
+from tensorpool import TensorPool
+
+# All tensors created within this context manager 
+# will automatically be CloudTensors
+with TensorPool():
+   # Create a tensor
+   tensor = torch.tensor([1.0, 2.0, 3.0])
+
+   # Perform an operation
+   result = tensor + tensor
+
+   # Realize the tensor
+   result.realize()
+
+   # Print the result
+   print(result)
+```
+
+### Example 2
+
+### Example 3
