@@ -8,6 +8,14 @@ TensorPool gives ML developers access to compute in 2 lines of code. Today, deve
 
 ## When to use TensorPool
 You should use TensorPool on small to medium sized models, maxing out at a few hundred gigabytes.
+
+## Differences from normal torch code 
+TensorPool aims to be as similar to a local developer experience as possible. So similar that you only have to add two lines, as shown below.
+```python
+with TensorPool():
+   {model code goes here}
+   model.realize()
+```
 {/*
 <img
   className="block dark:hidden"
