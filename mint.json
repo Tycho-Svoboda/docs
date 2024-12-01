@@ -42,7 +42,8 @@
         "quickstart",
         "introduction",
         "functions",
-        "examples"
+        "examples",
+        "authentication"
       ]
     }
   ],

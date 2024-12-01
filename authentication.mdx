@@ -1,0 +1,24 @@
+---
+title: 'Authentication'
+description: 'Learn how to authenticate'
+icon: 'lock-open'
+---
+## Authenticate in two easy steps
+### 1) Sign in [here](https://tensorpool.dev/login) to get your unique API key.
+### 2) When .realize() is called, you will be prompted to insert your API key in terminal. Copy and paste it and you're good to go!
+
+
+###
+###
+## What if I want to update my API key?
+### When wrapping a model with TensorPool, simply insert your API key.
+Before:
+```python
+with TensorPool():
+```
+After:
+```python
+# Insert API key as string
+example_key = '2fde-34fh-24dw'
+with TensorPool(example_key):
+```
