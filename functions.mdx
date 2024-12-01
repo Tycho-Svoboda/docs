@@ -1,21 +1,45 @@
 ---
 title: Functions
-description: 'Description of callable functions'
+description: 'Description of callable functions and TensorPool specific functionality'
 icon: "marker"
 ---
 ## CloudTensor()
-todo
+A wrapper/subclass of torch.Tensor that intercepts operations to be executed lazily in the cloud.
+
+We are intentionally violating the [Liskov Substitution Principle](https://en.wikipedia.org/wiki/Liskov_substitution_principle).
+This is because we are not subclassing for polymorphism, but to manipulate functionality (introducing dynamic control flow).
+This also breaks the assumptions that torch.Tensor makes about its subclasses, so we have to account for this (i.e. no methods that use the tensor's data can be called until realize()).
+
+**NOTE: Any torch.Tensor method can be run with a CloudTensor. We inherit all torch.Tensor methods.**
 
 ## tensorpool.realize()
-This function is called on a machine learning model. 
+Called on a CloudTensor machine learning model. 
 
-It sends the computation graph of the model to the TensorPool server. We train it for you using the best GPU for the job.
+It sends the computation graph of the model to the TensorPool server. We execute the computation graph using the best GPU for the job.
+
+
+Returns realized value and updates the CloudTensor's value and state.
 
 ## tensorpool.realized()
-todo
+Called on a CloudTensor machine learning model. 
 
-## tensorpool.tensor()
-todo
 
-## Use our context manager
-todo
+Returns if the computation graph has been realized. A graph is realized if it contains a single leaf node.
+
+## tensorpool.value()
+Called on a CloudTensor machine learning model. 
+
+Returns the underlying tensor data.
+
+## Build with our context manager
+Our context manager allows for completely normal PyTorch objects to be wrapped as CloudTensor objects by simply typing "With TensorPool():"
+
+
+You can then add any Python code within our context manager, and call any TensorPool functions, as shown below.
+```python
+with TensorPool():
+   {model code goes here}
+   model.realize()
+   model.realized()
+   model.value()
+```
