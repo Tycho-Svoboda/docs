@@ -18,7 +18,7 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:team@tensorpool.dev"
+      "url": "mailto:tycho@tensorpool.dev"
     }
   ],
   "topbarCtaButton": {
@@ -48,8 +48,6 @@
     }
   ],
   "footerSocials": {
-    "x": "https://x.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://linkedin.com/company/mintlify"
+    "discord": "https://discord.gg/MqjRcxW4c7"
   }
 }
