@@ -6,8 +6,8 @@ icon: 'list'
 ### Example 1
 Simple tensor addition
 ```python
-import torch
 from tensorpool import TensorPool
+import torch
 
 # All tensors created within this context manager 
 # will automatically be CloudTensors
@@ -28,6 +28,9 @@ with TensorPool():
 ### Example 2
 Sequential model walkthrough
 ```python
+from tensorpool import TensorPool
+import torch
+
 with TensorPool():
     # Creating a torch sequential model
     model = torch.nn.Sequential(
@@ -56,4 +59,30 @@ with TensorPool():
 ```
 
 ### Example 3
-TODO
+GPT 2 Query
+```python
+from tensorpool import TensorPool
+from transformers import GPT2LMHeadModel, AutoTokenizer
+
+with TensorPool():
+    model_name = "gpt2"
+    model = GPT2LMHeadModel.from_pretrained(model_name)
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+
+    # Allows a user to ask a question
+    prompt = input("Enter a prompt: ")
+    inputs = tokenizer(prompt, return_tensors="pt")
+
+    output = model.generate(
+        input_ids=inputs["input_ids"],
+        attention_mask=inputs["attention_mask"],
+        max_length=30,
+    )
+
+    print(type(output))  # CloudTensor
+
+    # Sometimes, TensorPool will automatically call .realize() 
+    # Using tokenizers like below is one of those examples
+    generated_text = tokenizer.batch_decode(output)[0]
+    print(generated_text)
+```
